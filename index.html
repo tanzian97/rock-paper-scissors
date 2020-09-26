@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>blank</title>
+        <meta charset="UTC-8">
+    </head>
+
+    <body>
+        <script>
+            function computerPlay() {
+                switch(Math.floor(Math.random() * 3)) {
+                case 0:
+                    return "Rock";
+                case 1:
+                    return "Paper";
+                case 2:
+                    return "Scissors";
+                }
+            }
+            function playRound(playerSelection, computerSelection) {
+                if (playerSelection === "Paper" && computerSelection === "Rock" || playerSelection === "Scissors" && computerSelection === "Paper" || playerSelection === "Rock" && computerSelection === "Scissors") {
+                    console.log("You won this round! " + playerSelection + " beats " + computerSelection + ".")
+                    return "Win";
+                }
+                if (playerSelection === "Rock" && computerSelection === "Paper" || playerSelection === "Paper" && computerSelection === "Scissors" || playerSelection === "Scissors" && computerSelection === "Rock") {
+                    console.log("You lost this round! " + computerSelection + " beats " + playerSelection + ".")
+                    return "Lose"
+                }
+                if (playerSelection === computerSelection) {
+                    console.log("This round ended in a draw! " + "Both players threw " + playerSelection + ".")
+                    return "Draw";
+                }
+            }
+            function game() {
+                let wins = 0;
+                for (i = 0; i < 5; i++) {
+                    do {
+                        playerSelection = prompt("Choose Rock, Paper, or Scissors.")
+                        playerSelection = playerSelection.toLowerCase()
+                        playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1);
+                    }
+                    while (["Rock", "Paper", "Scissors"].indexOf(playerSelection)  < 0)
+
+                    computerSelection = computerPlay();
+                    roundResult = playRound(playerSelection, computerSelection)
+                    switch(roundResult) {
+                        case "Win":
+                            wins ++;
+                            break;
+                        case "Lose":
+                            break;
+                        case "Draw":
+                            wins = wins + 0.5;
+                    }
+                }
+                displayGameResults(wins);
+            }
+
+            function displayGameResults(wins) {
+                if (wins > 2.5) {
+                    console.log("You won the set of five rounds! Congratulations!")
+                }
+                else if (wins < 2.5) {
+                    console.log("You lost the set of five rounds. Better luck next time!")
+                }
+                else {
+                    console.log("The set of five rounds ended in a draw! Boring!")
+                }
+            }
+            
+            game();
+        </script>
+    </body>
+
+</html>
+
+<script>
